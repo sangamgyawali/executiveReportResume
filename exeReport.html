@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Performance Summary</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap');
+
+    :root {
+        /* Palette extracted from image */
+        --brand-dark: #0B1121; /* Deep Navy from image background */
+        --brand-gold: #FFB700; /* Bright Amber/Gold from image text */
+        --brand-light: #f3f4f6;
+        --text-gray-light: #9ca3af;
+        --text-gray-dark: #4b5563;
+        
+        /* Updated accents to match Gold theme */
+        --accent-primary: var(--brand-gold); 
+    }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: #e5e7eb;
+        margin: 0;
+        padding: 20px;
+        color: #1f2937;
+        line-height: 1.5;
+    }
+
+    .dashboard {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        display: grid;
+        grid-template-columns: 260px 1fr;
+    }
+
+    /* Sidebar / Profile Section - Updated to Image Palette */
+    .sidebar {
+        background: var(--brand-dark);
+        color: white;
+        padding: 30px 25px;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #1f2937;
+    }
+
+    .profile-name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 5px;
+        letter-spacing: -0.5px;
+        color: #ffffff;
+    }
+
+    .profile-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        color: var(--brand-gold); /* Gold title to match image */
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .sidebar-section {
+        margin-bottom: 30px;
+    }
+
+    .sidebar-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--brand-gold); /* Gold headers */
+        margin-bottom: 12px;
+        font-weight: 700;
+        border-bottom: 1px solid rgba(255, 183, 0, 0.2);
+        padding-bottom: 5px;
+    }
+
+    .contact-item {
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #d1d5db;
+    }
+
+    .skill-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.05); /* Subtle transparent bg */
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        margin: 0 4px 6px 0;
+        border-left: 3px solid var(--brand-gold); /* Gold accent border */
+        color: #e5e7eb;
+    }
+
+    /* Main Content */
+    .main-content {
+        padding: 30px;
+        background: white;
+    }
+
+    /* Hero Metrics Strip */
+    .metrics-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .metric-box {
+        background: var(--brand-light);
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        border-top: 4px solid var(--brand-gold); /* Updated to Gold */
+    }
+
+    .metric-val {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--brand-dark);
+        display: block;
+    }
+
+    .metric-lbl {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--text-gray-dark);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    /* Section Headers */
+    .section-head {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--brand-dark);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .section-head::after {
+        content: '';
+        flex: 1;
+        height: 2px;
+        background: #e5e7eb;
+    }
+
+    /* Experience Cards */
+    .exp-card {
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 20px;
+        border-left: 3px solid #e5e7eb;
+    }
+
+    .exp-card.current {
+        border-left-color: var(--brand-gold); /* Updated to Gold */
+    }
+
+    .exp-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 6px;
+    }
+
+    .exp-role {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--brand-dark);
+    }
+
+    .exp-company {
+        color: #d97706; /* Darker amber for readability on white */
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .exp-date {
+        font-size: 0.8rem;
+        color: var(--text-gray-dark);
+        background: #f3f4f6;
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+
+    .exp-impact {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .exp-impact li {
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        position: relative;
+        padding-left: 15px;
+        color: #374151;
+        line-height: 1.4;
+    }
+
+    .exp-impact li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--brand-gold); /* Updated to Gold */
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    /* Highlight utility */
+    .highlight {
+        font-weight: 700;
+        color: var(--brand-dark);
+        background: rgba(255, 183, 0, 0.15); /* Gold background highlight */
+        padding: 0 4px;
+        border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+        .dashboard { grid-template-columns: 1fr; }
+        .sidebar { padding: 30px; }
+        .metrics-strip { grid-template-columns: 1fr; }
+        .exp-header { flex-direction: column; gap: 5px; }
+    }
+    
+    @media print {
+        body { padding: 0; background: white; }
+        .dashboard { box-shadow: none; border-radius: 0; width: 100%; max-width: 100%; }
+        .sidebar { background: #0B1121 !important; -webkit-print-color-adjust: exact; }
+        .metric-box { background: #f3f4f6 !important; -webkit-print-color-adjust: exact; }
+        .profile-name { color: white !important; }
+        .profile-title, .sidebar-label { color: #FFB700 !important; }
+    }
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="profile-name">Sangam<br>Gyawali</div>
+        <div class="profile-title">Sr. Technical Project Manager</div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-label">Contact</div>
+            <div class="contact-item">sangamgyawali5@gmail.com</div>
+            <div class="contact-item">+1 254-340-9675</div>
+            <div class="contact-item">linkedin.com/in/sangamgyawali</div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-label">Core Competencies</div>
+            <span class="skill-badge">GenAI Strategy</span>
+            <span class="skill-badge">Data Governance</span>
+            <span class="skill-badge">Agile Transformation</span>
+            <span class="skill-badge">Cloud Cost Optimization</span>
+            <span class="skill-badge">Regulatory Compliance</span>
+            <span class="skill-badge">Stakeholder Mgmt</span>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-label">Tech Stack</div>
+            <span class="skill-badge">Atlassian Suite</span>
+            <span class="skill-badge">Microsoft Suite</span>
+            <span class="skill-badge">Google Suite</span>
+            <span class="skill-badge">Coda</span>
+            <span class="skill-badge">Notion</span>
+            <span class="skill-badge">Python & SQL</span>
+            <span class="skill-badge">AWS & Databricks</span>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Hero Metrics -->
+        <div class="metrics-strip">
+            <div class="metric-box">
+                <span class="metric-val">$12M+</span>
+                <span class="metric-lbl">Annualized Savings</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-val">1000+</span>
+                <span class="metric-lbl">Hrs/Week Automated</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-val">100%</span>
+                <span class="metric-lbl">Regulatory Compliance</span>
+            </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="section-head">Executive Impact Record</div>
+
+        <div class="exp-card current">
+            <div class="exp-header">
+                <div>
+                    <span class="exp-role">Sr. Technical Project Manager</span>
+                    <span class="exp-company">| Warner Bros. Discovery</span>
+                </div>
+                <span class="exp-date">2022 - Present</span>
+            </div>
+            <ul class="exp-impact">
+                <li><strong>Strategic Cost Reduction:</strong> Led data ingestion SDK re-architecture, achieving <span class="highlight">$1MM+ monthly savings</span> (28% compute reduction).</li>
+                <li><strong>AI Transformation:</strong> Deployed GenAI programs automating <span class="highlight">1000+ hours/week</span> of manual operational processes.</li>
+                <li><strong>Governance Leadership:</strong> Designed frameworks that improved data quality by 30% and ensured <span class="highlight">100% regulatory adherence</span>.</li>
+                <li><strong>Cultural Change:</strong> Drove data stewardship adoption, resulting in a 96% positive feedback rate from training initiatives.</li>
+            </ul>
+        </div>
+
+        <div class="exp-card">
+            <div class="exp-header">
+                <div>
+                    <span class="exp-role">Technical Project Manager</span>
+                    <span class="exp-company">| Ernst & Young</span>
+                </div>
+                <span class="exp-date">2021 - 2022</span>
+            </div>
+            <ul class="exp-impact">
+                <li><strong>Quality Assurance:</strong> Reduced post-deployment issues by <span class="highlight">15%</span> through rigorous monitoring processes across Scrum teams.</li>
+                <li><strong>Process Optimization:</strong> Implemented Python/SQL governance practices yielding a <span class="highlight">20% lift</span> in data quality metrics.</li>
+                <li><strong>Risk Mitigation:</strong> Maintained 100% compliance rate for contractual and data privacy regulations.</li>
+            </ul>
+        </div>
+
+        <div class="exp-card">
+            <div class="exp-header">
+                <div>
+                    <span class="exp-role">Data Engineer</span>
+                    <span class="exp-company">| Mississippi State Univ.</span>
+                </div>
+                <span class="exp-date">2020 - 2021</span>
+            </div>
+            <ul class="exp-impact">
+                <li><strong>Automation:</strong> Engineered pipelines that reduced manual data collection time by <span class="highlight">90%</span>.</li>
+                <li><strong>Data Integrity:</strong> Established centralized data dictionaries and ERDs to standardize university datasets.</li>
+            </ul>
+        </div>
+
+        <div class="exp-card">
+            <div class="exp-header">
+                <div>
+                    <span class="exp-role">Application Developer</span>
+                    <span class="exp-company">| Sastodeal</span>
+                </div>
+                <span class="exp-date">2019 - 2020</span>
+            </div>
+            <ul class="exp-impact">
+                <li><strong>Foundation Building:</strong> Established initial ETL pipelines and defined core data standards for organizational alignment.</li>
+            </ul>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
